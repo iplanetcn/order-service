@@ -1,9 +1,12 @@
 package com.phenix.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.phenix.util.serializer.DateToLongSerializer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,6 +17,7 @@ import java.sql.Date;
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
+@DynamicUpdate
 public class ProductInfo {
     /** 商品编号 */
     @Id
@@ -48,8 +52,10 @@ public class ProductInfo {
     private Integer categoryType;
 
     /** 创建时间 */
+    @JsonSerialize(using = DateToLongSerializer.class)
     private Date createTime;
 
     /** 更新时间 */
+    @JsonSerialize(using = DateToLongSerializer.class)
     private Date updateTime;
 }

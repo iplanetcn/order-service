@@ -1,7 +1,9 @@
 package com.phenix.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.phenix.enums.OrderStatus;
 import com.phenix.enums.PayStatus;
+import com.phenix.util.serializer.DateToLongSerializer;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -40,9 +42,11 @@ public class OrderMaster {
     private Integer payStatus = PayStatus.WAIT.getCode();
 
     /** 创建时间 */
+    @JsonSerialize(using = DateToLongSerializer.class)
     private Date createTime;
 
     /** 修改时间 */
+    @JsonSerialize(using = DateToLongSerializer.class)
     private Date updateTime;
 
 }

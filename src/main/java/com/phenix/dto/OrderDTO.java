@@ -1,8 +1,10 @@
 package com.phenix.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.phenix.entity.OrderDetail;
 import com.phenix.enums.OrderStatus;
 import com.phenix.enums.PayStatus;
+import com.phenix.util.serializer.DateToLongSerializer;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -10,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
 
     /** 订单ID */
@@ -37,9 +40,11 @@ public class OrderDTO {
     private Integer payStatus = PayStatus.WAIT.getCode();
 
     /** 创建时间 */
+    @JsonSerialize(using = DateToLongSerializer.class)
     private Date createTime;
 
     /** 修改时间 */
+    @JsonSerialize(using = DateToLongSerializer.class)
     private Date updateTime;
 
     /** 订单详情列表 */

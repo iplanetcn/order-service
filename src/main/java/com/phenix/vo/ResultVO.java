@@ -9,7 +9,6 @@ import lombok.experimental.Accessors;
 
 /**
  * HTTP最外层数据
- *
  */
 @Data
 @Accessors(chain = true)

@@ -1,5 +1,7 @@
 package com.phenix.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.phenix.util.serializer.DateToLongSerializer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -35,8 +37,10 @@ public class ProductCategory {
     private Integer categoryType;
 
     /** 创建时间 */
+    @JsonSerialize(using = DateToLongSerializer.class)
     private Date createTime;
 
     /** 更新时间 */
+    @JsonSerialize(using = DateToLongSerializer.class)
     private Date updateTime;
 }

@@ -1,6 +1,7 @@
 package com.phenix.util;
 
-import com.phenix.enums.ResultCode;
+import com.phenix.enums.Result;
+import com.phenix.exception.SellException;
 import com.phenix.vo.ResultDataVO;
 import com.phenix.vo.ResultVO;
 
@@ -11,23 +12,23 @@ public class ResultUtils {
 
     public static ResultVO success(Object data) {
         ResultDataVO<Object> resultDataVO = new ResultDataVO<>();
-        resultDataVO.setCode(ResultCode.SUCCESS.getCode());
-        resultDataVO.setMessage(ResultCode.SUCCESS.getDescription());
+        resultDataVO.setCode(Result.SUCCESS.getCode());
+        resultDataVO.setMessage(Result.SUCCESS.getMessage());
         resultDataVO.setData(data);
         return resultDataVO;
     }
 
     public static ResultVO success() {
         ResultVO resultVO = new ResultVO();
-        resultVO.setCode(ResultCode.SUCCESS.getCode());
-        resultVO.setMessage(ResultCode.SUCCESS.getDescription());
+        resultVO.setCode(Result.SUCCESS.getCode());
+        resultVO.setMessage(Result.SUCCESS.getMessage());
         return resultVO;
     }
 
     public static ResultVO failure() {
         ResultVO resultVO = new ResultVO();
-        resultVO.setCode(ResultCode.FAILURE.getCode());
-        resultVO.setMessage(ResultCode.FAILURE.getDescription());
+        resultVO.setCode(Result.FAILURE.getCode());
+        resultVO.setMessage(Result.FAILURE.getMessage());
         return resultVO;
     }
 
@@ -37,5 +38,16 @@ public class ResultUtils {
         resultVO.setMessage(message);
         return resultVO;
     }
+
+    public static ResultVO error(SellException e) {
+        return error(e.getCode(), e.getMessage());
+    }
+
+    public static ResultVO error(Result r) {
+        return error(r.getCode(), r.getMessage());
+    }
+
+
+
 
 }

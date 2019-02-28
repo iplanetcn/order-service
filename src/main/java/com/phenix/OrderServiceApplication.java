@@ -1,18 +1,13 @@
 package com.phenix;
 
-import com.phenix.statemathine.OrderEvents;
-import com.phenix.statemathine.OrderStates;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.statemachine.StateMachine;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class OrderServiceApplication implements CommandLineRunner {
+public class OrderServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(OrderServiceApplication.class, args);
@@ -35,13 +30,13 @@ public class OrderServiceApplication implements CommandLineRunner {
         };
     }
 
-    @Autowired
-    private StateMachine<OrderStates, OrderEvents> stateMachine;
-
-    @Override
-    public void run(String... args) {
-        stateMachine.start();
-        stateMachine.sendEvent(OrderEvents.PAY);
-        stateMachine.sendEvent(OrderEvents.RECEIVE);
-    }
+//    @Autowired
+//    private StateMachine<OrderStates, OrderEvents> stateMachine;
+//
+//    @Override
+//    public void run(String... args) {
+//        stateMachine.start();
+//        stateMachine.sendEvent(OrderEvents.PAY);
+//        stateMachine.sendEvent(OrderEvents.RECEIVE);
+//    }
 }

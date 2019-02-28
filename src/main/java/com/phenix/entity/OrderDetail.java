@@ -1,5 +1,7 @@
 package com.phenix.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.phenix.util.serializer.DateToLongSerializer;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -33,8 +35,10 @@ public class OrderDetail {
     private String productIcon;
 
     /** 创建时间 */
+    @JsonSerialize(using = DateToLongSerializer.class)
     private Date createTime;
 
     /** 修改时间 */
+    @JsonSerialize(using = DateToLongSerializer.class)
     private Date updateTime;
 }

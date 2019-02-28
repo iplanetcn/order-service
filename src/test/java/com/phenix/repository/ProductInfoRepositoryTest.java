@@ -39,4 +39,10 @@ public class ProductInfoRepositoryTest {
         List<ProductInfo> result = repository.findByProductStatus(0);
         Assert.assertNotEquals(0, result.size());
     }
+
+    @Test
+    public void testFindByProductId() {
+        ProductInfo result = repository.findById("123456").orElse(null);
+        Assert.assertNotNull(result);
+    }
 }
