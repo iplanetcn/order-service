@@ -25,7 +25,6 @@ import java.util.Map;
 public class AppErrorController extends AbstractErrorController {
     private static final String PATH = "/error";
 
-
     @Autowired
     public AppErrorController(ErrorAttributes errorAttributes) {
         super(errorAttributes);

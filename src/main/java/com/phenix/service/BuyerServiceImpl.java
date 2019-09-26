@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class BuyerServiceImpl implements BuyerService {
 
-    private OrderService orderService;
+    private final OrderService orderService;
 
     @Autowired
     public BuyerServiceImpl(OrderService orderService) {

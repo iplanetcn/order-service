@@ -10,8 +10,8 @@ import com.phenix.vo.ResultVO;
  */
 public class ResultUtils {
 
-    public static ResultVO success(Object data) {
-        ResultDataVO<Object> resultDataVO = new ResultDataVO<>();
+    public static <T> ResultDataVO<T> success(T data) {
+        ResultDataVO<T> resultDataVO = new ResultDataVO<>();
         resultDataVO.setCode(Result.SUCCESS.getCode());
         resultDataVO.setMessage(Result.SUCCESS.getMessage());
         resultDataVO.setData(data);

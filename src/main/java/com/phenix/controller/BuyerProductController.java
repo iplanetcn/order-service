@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(value = "/buyer/product", tags = "商品", description = "商品相关操作")
+@Api(value = "/buyer/product", tags = "商品")
 @RestController
 @RequestMapping("/buyer/product")
 @Slf4j

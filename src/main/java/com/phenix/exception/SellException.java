@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class SellException extends RuntimeException {
-    private Integer code;
+    private final Integer code;
 
     public SellException(Result result) {
         super(result.getMessage());

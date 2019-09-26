@@ -27,7 +27,7 @@ public class OrderMasterRepositoryTest {
 
     @Autowired
     private OrderMasterRepository repository;
-    private final String OPENID = "10000";
+    private static final String OPENID = "10000";
 
     @Test
     @Transactional
@@ -38,7 +38,7 @@ public class OrderMasterRepositoryTest {
         orderMaster.setBuyerPhone("12341234123");
         orderMaster.setBuyerAddress("test address");
         orderMaster.setBuyerOpenid(OPENID);
-        orderMaster.setOrderAmount(new BigDecimal(2.3));
+        orderMaster.setOrderAmount(BigDecimal.valueOf(2.3));
 
         OrderMaster result = repository.save(orderMaster);
         assertNotNull(result);

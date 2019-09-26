@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * BuyerOrderController
@@ -29,13 +30,13 @@ import java.util.Map;
  * @author john
  * @since 2018-12-14
  */
-@Api(value = "/buyer/order", tags = "订单", description = "订单相关操作")
+@Api(value = "/buyer/order", tags = "订单")
 @RestController
 @RequestMapping("/buyer/order")
 @Slf4j
 public class BuyerOrderController {
-    private OrderService orderService;
-    private BuyerService buyerService;
+    private final OrderService orderService;
+    private final BuyerService buyerService;
 
     @Autowired
     public BuyerOrderController(OrderService orderService,
@@ -57,7 +58,7 @@ public class BuyerOrderController {
     public ResultVO create(@Valid OrderForm orderForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.error("[创建订单]参数不正确, orderForm={}", orderForm);
-            throw new SellException(Result.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
+            throw new SellException(Result.PARAM_ERROR.getCode(), Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
         }
 
         OrderDTO orderDTO = OrderFormToOrderDTOConverter.convert(orderForm);
@@ -123,7 +124,10 @@ public class BuyerOrderController {
     @PostMapping("/cancel")
     public ResultVO cancel(@RequestParam("openid") String openid,
                            @RequestParam("orderId") String orderId) {
-        buyerService.cancelOrder(openid, orderId);
+        OrderDTO orderDTO = buyerService.cancelOrder(openid, orderId);
+        if (orderDTO == null) {
+            return ResultUtils.success(Result.ORDER_NOT_EXIST);
+        }
         return ResultUtils.success();
     }
 }

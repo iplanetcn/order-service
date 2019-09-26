@@ -35,9 +35,9 @@ import static com.phenix.enums.Result.*;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private OrderMasterRepository orderMasterRepository;
-    private OrderDetailRepository orderDetailRepository;
-    private ProductService productService;
+    private final OrderMasterRepository orderMasterRepository;
+    private final OrderDetailRepository orderDetailRepository;
+    private final ProductService productService;
 
     @Autowired
     public OrderServiceImpl(OrderMasterRepository orderMasterRepository,

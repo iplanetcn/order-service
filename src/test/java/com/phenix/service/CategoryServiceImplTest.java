@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,7 +23,7 @@ public class CategoryServiceImplTest {
     @Test
     public void findOne() {
         ProductCategory productCategory = categoryService.findOne(1);
-        Assert.assertEquals(new Integer(1), productCategory.getCategoryId());
+        Assert.assertEquals(Integer.valueOf(1), Objects.requireNonNull(productCategory).getCategoryId());
     }
 
     @Test

@@ -20,7 +20,7 @@ public class OrderDetailRepositoryTest {
 
     @Autowired
     private OrderDetailRepository repository;
-    private final String ORDER_ID = "123456";
+    private static final String ORDER_ID = "123456";
 
     @Test
     @Transactional
