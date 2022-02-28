@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_order_service?characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/db_order_service?characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: root
   jpa:
@@ -14,18 +14,24 @@ spring:
 # 返回数据中消除json数据中null项
   jackson:
     default-property-inclusion: non_null
-
+#出现错误时, 直接抛出异常
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
 
 server:
   servlet:
     context-path: /order_service
-  port: 8080
+  port: 8086
 
 
 # SQL statements and trace
 #logging:
 #  pattern:
 #    console: '%d: %msg%n'
-#  file: /var/log/springboot/order_service.log
 #  level:
 #    com.phenix.LoggerTest: debug/
+#  file:
+#    name: /var/log/springboot/order_service.log

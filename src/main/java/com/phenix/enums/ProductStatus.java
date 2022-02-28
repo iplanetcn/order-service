@@ -9,6 +9,6 @@ public enum ProductStatus {
     UP(0, "正常"),
     DOWN(1, "下线");
 
-    private Integer code;
-    private String description;
+    private final Integer code;
+    private final String description;
 }

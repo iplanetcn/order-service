@@ -13,11 +13,11 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@JsonPropertyOrder({"code", "msg"})
+@JsonPropertyOrder({"code", "message"})
 public class ResultVO {
     @NonNull
     private Integer code;
     @NonNull
-    @JsonProperty("msg")
+    @JsonProperty("message")
     private String message;
 }

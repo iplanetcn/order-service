@@ -10,6 +10,6 @@ public enum OrderStatus {
     FINISHED(1, "完结"),
     CANCEL(2, "已取消");
 
-    private Integer code;
-    private String description;
+    private final Integer code;
+    private final String description;
 }

@@ -85,7 +85,7 @@ public class BuyerOrderController {
     public ResultVO list(@RequestParam("openid") String openid,
                          @RequestParam(value = "page", defaultValue = "0") Integer page,
                          @RequestParam(value = "size", defaultValue = "10") Integer size) {
-        if (StringUtils.isEmpty(openid)) {
+        if (StringUtils.hasLength(openid)) {
             log.error("[订单列表]参数openid不能为空");
             throw new SellException(Result.PARAM_ERROR);
         }

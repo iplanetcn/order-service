@@ -5,20 +5,17 @@ import com.phenix.entity.OrderDetail;
 import com.phenix.enums.OrderStatus;
 import com.phenix.enums.PayStatus;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
 public class OrderServiceImplTest {
@@ -64,7 +61,7 @@ public class OrderServiceImplTest {
     @Test
     public void findList() {
         Page<OrderDTO> result = orderService.findList(BUYER_OPENID, PageRequest.of(0, 10));
-        log.info("[查找多个订单]" + result.getContent().toString());
+        log.info("[查找多个订单]" + result.getContent());
     }
 
     @Test

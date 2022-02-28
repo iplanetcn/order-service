@@ -1,22 +1,19 @@
 package com.phenix.service;
 
 import com.phenix.entity.ProductInfo;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductServiceImplTest {
     @Autowired
@@ -48,7 +45,7 @@ public class ProductServiceImplTest {
         productInfo.setProductId("123457");
         productInfo.setProductName("江油肥肠");
         productInfo.setProductDescription("江油肥肠,肥而不腻，美味可口。");
-        productInfo.setProductPrice(new BigDecimal(10.00));
+        productInfo.setProductPrice(new BigDecimal("10.00"));
         productInfo.setProductStack(50);
         productInfo.setProductIcon("https://ss0.baidu.com/73x1bjeh1BF3odCf/it/u=3478414879,3360474584&fm=85&s=D828AA551713666B107154640300407B");
         productInfo.setCategoryType(2);

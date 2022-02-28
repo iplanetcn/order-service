@@ -45,7 +45,7 @@ public class BuyerProductController {
                                                         .collect(Collectors.toList());
         List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
         // 拼装数据
-        List<ProductVO> data = concatListData(productInfoList, productCategoryList);
+        List<ProductVO<?>> data = concatListData(productInfoList, productCategoryList);
         return ResultUtils.success(data);
     }
 
@@ -56,7 +56,7 @@ public class BuyerProductController {
      * @param productCategoryList 商品类目列表
      * @return 商品表
      */
-    private List<ProductVO> concatListData(List<ProductInfo> productInfoList,
+    private List<ProductVO<?>> concatListData(List<ProductInfo> productInfoList,
                                            List<ProductCategory> productCategoryList) {
         return productCategoryList.stream()
                                   .map(category -> new ProductVO<List<ProductInfoVO>>().of(category))

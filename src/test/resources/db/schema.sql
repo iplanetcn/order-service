@@ -1,6 +1,6 @@
 -- 创建数据库
--- CREATE DATABASE IF NOT EXISTS `db_order_service`;
--- USE `db_order_service`;
+CREATE DATABASE IF NOT EXISTS `db_order_service`;
+USE `db_order_service`;
 
 -- 创建商品类目表
 CREATE TABLE `product_category` (
