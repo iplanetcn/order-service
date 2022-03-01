@@ -1,29 +1,27 @@
 package com.phenix.util;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class RedisUtilsTest {
     @Resource
     private RedisUtils redisUtils;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         boolean isSuccess = redisUtils.set("user_name", "John Lee");
-        Assert.assertTrue(isSuccess);
+        assertTrue(isSuccess);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         redisUtils.del("user_name");
     }
@@ -31,7 +29,7 @@ public class RedisUtilsTest {
     @Test
     public void getUserName() {
         String user_nme = (String) redisUtils.get("user_name");
-        Assert.assertEquals("John Lee", user_nme);
+        assertEquals("John Lee", user_nme);
     }
 
 

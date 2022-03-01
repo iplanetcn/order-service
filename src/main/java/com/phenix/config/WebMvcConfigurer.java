@@ -5,7 +5,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
-import javax.annotation.Nonnull;
 
 /**
  * WebMvcConfigurer
@@ -27,7 +26,7 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
     }
 
     @Override
-    protected void addCorsMappings(@Nonnull CorsRegistry registry) {
+    protected void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/*")
                 .allowedOrigins("*")
                 .allowedHeaders("*")
