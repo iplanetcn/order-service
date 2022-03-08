@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:db_order_service
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  jooq:
+    sql-dialect: org.hibernate.dialect.H2Dialect
+  sql:
+    init:
+      schema-locations: schema.sql
+      data-locations: data.sql

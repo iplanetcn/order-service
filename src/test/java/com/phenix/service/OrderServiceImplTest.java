@@ -4,7 +4,6 @@ import com.phenix.dto.OrderDTO;
 import com.phenix.entity.OrderDetail;
 import com.phenix.enums.OrderStatus;
 import com.phenix.enums.PayStatus;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +16,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Slf4j
 public class OrderServiceImplTest {
 
     private static final String BUYER_OPENID = "12341234123";
@@ -47,7 +45,7 @@ public class OrderServiceImplTest {
         orderDTO.setOrderDetailList(orderDetailList);
         OrderDTO result = orderService.createOrder(orderDTO);
 
-        log.info("[创建订单] result={}" + result.toString());
+        System.out.println("[创建订单] result={}" + result.toString());
 
     }
 
@@ -55,13 +53,13 @@ public class OrderServiceImplTest {
     public void findOne() {
         String orderId = "098a6031a71a4d3886e9d51394bb9a54";
         OrderDTO result = orderService.findOne(orderId);
-        log.info("[查找一个订单]" + result.toString());
+        System.out.println("[查找一个订单]" + result.toString());
     }
 
     @Test
     public void findList() {
         Page<OrderDTO> result = orderService.findList(BUYER_OPENID, PageRequest.of(0, 10));
-        log.info("[查找多个订单]" + result.getContent());
+        System.out.println("[查找多个订单]" + result.getContent());
     }
 
     @Test
