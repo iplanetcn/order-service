@@ -1,17 +1,83 @@
+#======================================================================================================================#
+# server config
+#======================================================================================================================#
+server:
+  servlet:
+    context-path: /
+  port: 8086
+#======================================================================================================================#
+# spring config
+#======================================================================================================================#
 spring:
+  batch:
+    jdbc:
+      initialize-schema: always
   datasource:
-    url: jdbc:h2:mem:db_order_service
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+    name: test
     username: sa
-    password: password
+    password:
     driverClassName: org.h2.Driver
+
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     defer-datasource-initialization: true
   jooq:
     sql-dialect: org.hibernate.dialect.H2Dialect
-  sql:
-    init:
-      schema-locations: schema.sql
-      data-locations: data.sql
+#  sql:
+#    init:
+#      schema-locations: classpath:schema.sql
+#      data-locations: classpath:data.sql
+  h2:
+    console:
+      settings:
+        web-allow-others: true
+        trace: true
+      path: /h2-console
+      enabled: true
+
+  redis:
+    database: 0      # Redis数据库索引（默认为0）
+    host: localhost  # Redis服务器地址
+    port: 6379       # Redis服务器连接端口
+    password:        # Redis服务器连接密码（默认为空）
+    timeout: 200     # 连接超时时间（毫秒）
+    jedis:
+      pool:
+        max-active: 8  # 连接池最大连接数（使用负值表示没有限制）
+        max-idle: 8    # 连接池中的最大空闲连接
+        max-wait: -1   # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        min-idle: 0    # 连接池中的最小空闲连接
+
+  # 返回数据中消除json数据中null项
+  jackson:
+    default-property-inclusion: non_null
+  #出现错误时, 直接抛出异常
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
+#======================================================================================================================#
+# 接口文档配置[默认禁用,仅开发环境生效]
+#======================================================================================================================#
+springdoc:
+  api-docs:
+    enabled: false
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: false
+    path: /swagger-ui.html
+    tagsSorter: alpha
+    operations-sorter: alpha
+    use-root-path: false
+    # 隐藏底部所有模型
+    default-models-expand-depth: -1
+    # 文档展开深度
+    default-model-expand-depth: 3
+  packages-to-scan: com.phenix.controller
+  cache:
+    disabled: true

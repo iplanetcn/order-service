@@ -8,8 +8,8 @@ import com.phenix.util.ResultUtils;
 import com.phenix.vo.ProductInfoVO;
 import com.phenix.vo.ProductVO;
 import com.phenix.vo.ResultVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(value = "/buyer/product", tags = "商品")
+@Tag(name = "/buyer/product", description = "商品")
 @RestController
 @RequestMapping("/buyer/product")
 @Slf4j
@@ -33,7 +33,7 @@ public class BuyerProductController {
         this.categoryService = categoryService;
     }
 
-    @ApiOperation(value = "商品列表", notes = "列出所有已上线的商品")
+    @Operation(description = "商品列表", summary = "列出所有已上线的商品")
     @GetMapping("/list")
     public ResultVO list() {
         // 查询所有的上架商品

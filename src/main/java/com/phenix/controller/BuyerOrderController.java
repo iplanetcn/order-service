@@ -9,7 +9,10 @@ import com.phenix.service.BuyerService;
 import com.phenix.service.OrderService;
 import com.phenix.util.ResultUtils;
 import com.phenix.vo.ResultVO;
-import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -30,7 +33,7 @@ import java.util.Objects;
  * @author john
  * @since 2018-12-14
  */
-@Api(value = "/buyer/order", tags = "订单")
+@Tag(name = "/buyer/order", description = "订单")
 @RestController
 @RequestMapping("/buyer/order")
 @Slf4j
@@ -53,7 +56,7 @@ public class BuyerOrderController {
      * @param bindingResult 绑定结果
      * @return 创建结果
      */
-    @ApiOperation(value = "创建订单", notes = "必须参数:用户名,地址,电话,openid,购物车不能为空")
+    @Operation(description = "创建订单", summary = "必须参数:用户名,地址,电话,openid,购物车不能为空")
     @PostMapping("/create")
     public ResultVO create(@Valid OrderForm orderForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -80,11 +83,11 @@ public class BuyerOrderController {
      * @param size   分页大小
      * @return 订单列表数据
      */
-    @ApiOperation(value = "查询订单", notes = "必须参数:openid, page, size")
+    @Operation(description = "查询订单", summary = "必须参数:openid, page, size")
     @GetMapping("/list")
-    public ResultVO list(@RequestParam("openid") String openid,
-                         @RequestParam(value = "page", defaultValue = "0") Integer page,
-                         @RequestParam(value = "size", defaultValue = "10") Integer size) {
+    public ResultVO list(@RequestParam(defaultValue = "123123123") String openid,
+                         @RequestParam(defaultValue = "0") Integer page,
+                         @RequestParam(defaultValue = "10") Integer size) {
         if (StringUtils.hasLength(openid)) {
             log.error("[订单列表]参数openid不能为空");
             throw new SellException(Result.PARAM_ERROR);
@@ -101,10 +104,14 @@ public class BuyerOrderController {
      * @param orderId 订单编号
      * @return 订单详情数据
      */
-    @ApiOperation(value = "查询订单详情", notes = "必须参数:openid, orderId")
+    @Operation(description = "查询订单详情", summary = "必须参数:openid, orderId")
+    @Parameters({
+            @Parameter(description = "微信openid", required = true),
+            @Parameter(description = "订单编号", required = true)
+    })
     @GetMapping("/detail")
-    public ResultVO detail(@RequestParam("openid") @ApiParam(value = "微信openid", defaultValue = "123123123", required = true) String openid,
-                           @RequestParam("orderId") @ApiParam(value = "订单编号", defaultValue = "cd9f8b734c8d4fa38159fe5e452d7e29", required = true) String orderId) {
+    public ResultVO detail(@RequestParam(defaultValue = "123123123") String openid,
+                           @RequestParam(defaultValue = "cd9f8b734c8d4fa38159fe5e452d7e29") String orderId) {
         OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
         return ResultUtils.success(orderDTO);
     }
@@ -116,14 +123,14 @@ public class BuyerOrderController {
      * @param orderId 订单编号
      * @return 订单详情数据
      */
-    @ApiOperation(value = "取消订单", notes = "必须参数:openid, orderId")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "openid", value = "微信openid", paramType = "query", dataType = "String", required = true),
-            @ApiImplicitParam(name = "orderId", value = "订单编号", paramType = "query", dataType = "String", required = true)
+    @Operation(description = "取消订单", summary = "必须参数:openid, orderId")
+    @Parameters({
+            @Parameter(name = "openid", description = "微信openid", required = true),
+            @Parameter(name = "orderId", description = "订单编号", required = true)
     })
     @PostMapping("/cancel")
-    public ResultVO cancel(@RequestParam("openid") String openid,
-                           @RequestParam("orderId") String orderId) {
+    public ResultVO cancel(@RequestParam String openid,
+                           @RequestParam String orderId) {
         OrderDTO orderDTO = buyerService.cancelOrder(openid, orderId);
         if (orderDTO == null) {
             return ResultUtils.success(Result.ORDER_NOT_EXIST);

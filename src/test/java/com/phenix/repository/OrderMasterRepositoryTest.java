@@ -3,12 +3,9 @@ package com.phenix.repository;
 import com.phenix.entity.OrderMaster;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -16,10 +13,7 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@DataJpaTest
 @SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles("test")
 public class OrderMasterRepositoryTest {
 
     @Autowired
@@ -43,6 +37,7 @@ public class OrderMasterRepositoryTest {
 
     @Test
     public void findByBuyerOpenid() {
+        saveTest();
         Page<OrderMaster> result = repository.findAllByBuyerOpenid(OPENID, PageRequest.of(0, 8));
         assertNotEquals(0, result.getTotalElements());
     }

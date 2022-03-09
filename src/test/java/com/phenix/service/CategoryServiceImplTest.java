@@ -18,20 +18,29 @@ public class CategoryServiceImplTest {
     @Autowired
     private CategoryServiceImpl categoryService;
 
+    private void saveOne() {
+        ProductCategory pd = new ProductCategory("test", 2);
+        ProductCategory result = categoryService.save(pd);
+        assertNotNull(result);
+    }
+
     @Test
     public void findOne() {
+        saveOne();
         ProductCategory productCategory = categoryService.findOne(1);
         assertEquals(Integer.valueOf(1), Objects.requireNonNull(productCategory).getCategoryId());
     }
 
     @Test
     public void findAll() {
+        saveOne();
         List<ProductCategory> all = categoryService.findAll();
         assertNotEquals(0, all.size());
     }
 
     @Test
     public void findByCategoryTypeIn() {
+        saveOne();
         List<Integer> list = Lists.newArrayList(1, 2);
         List<ProductCategory> result = categoryService.findByCategoryTypeIn(list);
         assertNotEquals(0, result.size());
